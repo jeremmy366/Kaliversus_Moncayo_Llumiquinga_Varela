@@ -73,11 +73,11 @@ async function bootstrap() {
     },
   });
 
-  const port = process.env.PORT || 3000;
-  await app.listen(port);
-  
-  console.log(`🚀 Aplicación corriendo en: http://localhost:${port}`);
-  console.log(`📚 Documentación Swagger: http://localhost:${port}/api/docs`);
+  const port = process.env.PORT || 8080;
+  await app.listen(port, '0.0.0.0');
+  const publicUrl = process.env.RAILWAY_PUBLIC_URL || `http://localhost:${port}`;
+  console.log(`🚀 Aplicación corriendo en: ${publicUrl}`);
+  console.log(`📚 Documentación Swagger: ${publicUrl}/api/docs`);
 }
 
 bootstrap();
