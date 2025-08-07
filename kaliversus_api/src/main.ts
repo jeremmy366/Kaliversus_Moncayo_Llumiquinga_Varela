@@ -27,6 +27,8 @@ async function bootstrap() {
   });
 
 
+  // Configurar trust proxy para plataformas como Railway
+  app.getHttpAdapter().getInstance().set('trust proxy', 1);
   // Seguridad: Helmet
   app.use(helmet());
 
