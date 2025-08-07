@@ -1,0 +1,14 @@
+{
+  "name": "email-worker",
+  "version": "1.0.0",
+  "main": "email-worker.js",
+  "scripts": {
+    "start": "node email-worker.js"
+  },
+  "dependencies": {
+    "amqplib": "^0.10.3",
+    "axios": "^1.11.0",
+    "dotenv": "^16.0.3",
+    "nodemailer": "^6.9.11"
+  }
+}
