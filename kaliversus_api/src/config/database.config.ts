@@ -17,7 +17,7 @@ export default registerAs(
         entities: [User, Role, Publication, Review, Notification, AuditLog],
         synchronize: false,
         logging: process.env.NODE_ENV === 'development',
-        ssl: true,
+        ssl: { rejectUnauthorized: false },
         extra: {
           connectTimeoutMS: 10000,
         },
