@@ -73,7 +73,7 @@ async function bootstrap() {
     },
   });
 
-  const port = process.env.PORT || 8080;
+  const port = process.env.PORT || 3000;
   await app.listen(port, '0.0.0.0');
   const publicUrl = process.env.RAILWAY_PUBLIC_URL || `http://localhost:${port}`;
   console.log(`🚀 Aplicación corriendo en: ${publicUrl}`);
