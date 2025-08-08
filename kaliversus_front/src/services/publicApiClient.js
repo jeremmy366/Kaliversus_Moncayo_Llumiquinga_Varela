@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // URL directa del backend para APIs públicas
-const API_BASE_URL = "http://localhost:3000";
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
 // Crear instancia de axios para APIs públicas (sin autenticación)
 const publicApiClient = axios.create({
