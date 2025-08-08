@@ -51,7 +51,7 @@ async function bootstrap() {
 
   // Configuración de CORS
   app.enableCors({
-    origin: process.env.NODE_ENV === 'production' ? ['https://yourdomain.com'] : true,
+    origin: process.env.NODE_ENV === 'production' ? ['https://kaliversus.vercel.app'] : true,
     credentials: true,
   });
 
