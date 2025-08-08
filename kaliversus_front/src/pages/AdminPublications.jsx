@@ -149,6 +149,9 @@ const AdminPublications = () => {
         <div className="mb-2 text-xs text-gray-500">user.role: {user?.role}</div>
         <h2 className="text-2xl font-bold">Gestión de Publicaciones</h2>
         <div className="flex gap-2">
+          <Button onClick={() => navigate("/publications/create")} className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition">
+            Agregar Publicación
+          </Button>
           {user?.role && ["ADMIN", "AUTOR"].includes(user.role.toUpperCase()) && (
             <Button size="sm" variant="outline" onClick={() => setShowEmailModal(true)}>
               Enviar Notificación

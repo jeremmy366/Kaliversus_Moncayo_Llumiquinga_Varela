@@ -44,10 +44,25 @@ const EditPublication = () => {
     setLoading(true);
     setError(null);
     try {
+      // Limpiar propiedades no permitidas
+      const forbidden = [
+        "id",
+        "estado",
+        "versionActual",
+        "fechaCreacion",
+        "fechaActualizacion",
+        "autorPrincipal",
+        "autorPrincipalId",
+        "coautores",
+        "revisiones",
+        "contenido",
+        "categoria",
+      ];
       const data = {
         ...form,
         palabrasClave: form.palabrasClave.split(",").map((w) => w.trim()),
       };
+      forbidden.forEach((key) => delete data[key]);
       await publicationService.updatePublication(id, data);
       navigate("/dashboard");
     } catch (err) {
@@ -61,7 +76,12 @@ const EditPublication = () => {
 
   return (
     <div className="max-w-2xl mx-auto p-8">
-      <h2 className="text-2xl font-bold mb-4">Editar Publicación</h2>
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-2xl font-bold">Editar Publicación</h2>
+        <Button type="button" onClick={() => navigate("/publications/create")} className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition">
+          Agregar Publicación
+        </Button>
+      </div>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block font-medium">Título</label>
@@ -70,10 +90,6 @@ const EditPublication = () => {
         <div>
           <label className="block font-medium">Resumen</label>
           <textarea name="resumen" value={form.resumen} onChange={handleChange} className="w-full border rounded px-3 py-2" required />
-        </div>
-        <div>
-          <label className="block font-medium">Contenido</label>
-          <textarea name="contenido" value={form.contenido} onChange={handleChange} className="w-full border rounded px-3 py-2" required />
         </div>
         <div>
           <label className="block font-medium">Categoría</label>

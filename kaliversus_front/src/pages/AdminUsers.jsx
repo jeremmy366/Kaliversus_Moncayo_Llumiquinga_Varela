@@ -17,13 +17,15 @@ const AdminUsers = () => {
     userService
       .getUsers(page, limit)
       .then((res) => {
-        let arr = res.data.items || res.data;
+        console.log("[AdminUsers] Respuesta getUsers:", res);
+        let arr = res.data.users || res.data.items || res.data;
         if (!Array.isArray(arr)) arr = [];
         setUsers(arr);
         setTotal(res.data.total || 0);
         setLoading(false);
       })
       .catch((err) => {
+        console.error("[AdminUsers] Error al cargar usuarios:", err);
         setError("Error al cargar usuarios");
         setLoading(false);
       });
@@ -79,13 +81,20 @@ const AdminUsers = () => {
             <tbody>
               {filteredUsers.map((user) => (
                 <tr key={user.id}>
-                  <td className="border px-4 py-2">{user.nombre}</td>
+                  <td className="border px-4 py-2">{`${user.nombres || ""} ${user.apellidos || ""}`.trim() || "Sin nombre"}</td>
                   <td className="border px-4 py-2">{user.email}</td>
-                  <td className="border px-4 py-2">{user.rol}</td>
                   <td className="border px-4 py-2">
-                    {/* Botón editar (a implementar) */}
-                    <button className="mr-2 text-blue-600 hover:underline">Editar</button>
-                    <button onClick={() => handleDelete(user.id)} className="text-red-600 hover:underline">
+                    {user.rol
+                      ? typeof user.rol === "object"
+                        ? user.rol.nombre || JSON.stringify(user.rol)
+                        : user.rol
+                      : Array.isArray(user.roles) && user.roles.length > 0
+                      ? user.roles.map((r) => r.nombre).join(", ")
+                      : "Sin rol"}
+                  </td>
+                  <td className="border px-4 py-2 flex gap-2">
+                    <button className="px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition">Editar</button>
+                    <button onClick={() => handleDelete(user.id)} className="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition">
                       Eliminar
                     </button>
                   </td>

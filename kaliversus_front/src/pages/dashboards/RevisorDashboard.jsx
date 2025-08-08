@@ -529,6 +529,52 @@ const RevisorDashboard = () => {
         </CardContent>
       </Card>
       {/* Modal para ver publicación */}
+      {/* Modal para dejar review */}
+      {showReviewModal && selectedPublication && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+          <div className="bg-white rounded-lg shadow-lg max-w-lg w-full p-6 relative">
+            <button className="absolute top-2 right-2 text-gray-400 hover:text-gray-600" onClick={closeReviewModal}>
+              &times;
+            </button>
+            <h2 className="text-2xl font-bold mb-4">Dejar Review</h2>
+            <form onSubmit={handleSubmitReview} className="space-y-4">
+              <div>
+                <label className="block font-medium">Comentarios</label>
+                <textarea
+                  name="comentarios"
+                  value={reviewForm.comentarios}
+                  onChange={(e) => setReviewForm({ ...reviewForm, comentarios: e.target.value })}
+                  className="w-full border rounded px-3 py-2"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block font-medium">Estado</label>
+                <select
+                  name="estado"
+                  value={reviewForm.estado}
+                  onChange={(e) => setReviewForm({ ...reviewForm, estado: e.target.value })}
+                  className="w-full border rounded px-3 py-2"
+                >
+                  <option value="ACEPTADA">ACEPTADA</option>
+                  <option value="RECHAZADA">RECHAZADA</option>
+                  <option value="EN_PROCESO">EN PROCESO</option>
+                  <option value="DEVUELTA">DEVUELTA</option>
+                  <option value="PENDIENTE">PENDIENTE</option>
+                </select>
+              </div>
+              <div className="flex justify-end gap-2">
+                <Button type="button" variant="outline" onClick={closeReviewModal}>
+                  Cancelar
+                </Button>
+                <Button type="submit" disabled={reviewLoading}>
+                  {reviewLoading ? "Enviando..." : "Enviar Review"}
+                </Button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
       {showViewModal && viewPublication && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
           <div className="bg-white rounded-lg shadow-lg max-w-lg w-full p-6 relative">
