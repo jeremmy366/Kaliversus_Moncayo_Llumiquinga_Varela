@@ -6,6 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
+  "start:email-worker": "node src/worker/email-worker.js",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
@@ -25,7 +26,7 @@
     "typeorm:timestamp": "node -e \"console.log(Date.now())\"",
     "db:backup": "pg_dump --dbname=$env:DATABASE_URL --format=custom --file=backup_$(Get-Date -Format yyyyMMdd_HHmmss).dump"
    ,
-   "start:worker": "node dist/email-worker/index.js"
+  "start:worker": "node dist/email-worker/index.js"
   },
   "engines": {
     "node": ">=22.0.0"

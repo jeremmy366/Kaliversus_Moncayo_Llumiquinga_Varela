@@ -1,7 +1,7 @@
 // email-worker.js
 // Microservicio/worker para consumir la cola 'email_notifications' de RabbitMQ y enviar emails
 
-require('dotenv').config({ path: '../../.env' });
+require('dotenv').config({ path: require('path').resolve(__dirname, '../../.env') });
 const amqp = require('amqplib');
 
 const axios = require('axios');
